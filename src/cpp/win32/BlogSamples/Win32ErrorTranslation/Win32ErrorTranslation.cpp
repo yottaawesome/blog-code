@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <sstream>
 #include <Windows.h>
 
 std::wstring TranslateWin32ErrorCode(const DWORD errorCode) noexcept
