@@ -3,7 +3,7 @@
 #include <sstream>
 #include <Windows.h>
 
-std::wstring GetErrorCodeString(const DWORD errorCode) noexcept
+std::wstring TranslateWin32ErrorCode(const DWORD errorCode) noexcept
 {
     std::wstring errorMessage;
     void* ptrMsgBuf = nullptr;
@@ -11,6 +11,7 @@ std::wstring GetErrorCodeString(const DWORD errorCode) noexcept
         FORMAT_MESSAGE_ALLOCATE_BUFFER |
         FORMAT_MESSAGE_FROM_SYSTEM |
         FORMAT_MESSAGE_IGNORE_INSERTS;
+    // See https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-formatmessagew
     FormatMessageW(
         flags,
         nullptr,
@@ -32,12 +33,13 @@ std::wstring GetErrorCodeString(const DWORD errorCode) noexcept
 
 int main(int argc, char* args[])
 {
+    // For a useful list of Win32 error codes, see: https://docs.microsoft.com/en-us/windows/win32/debug/system-error-codes
     std::wcout 
-        << GetErrorCodeString(ERROR_FILE_NOT_FOUND) 
+        << TranslateWin32ErrorCode(ERROR_FILE_NOT_FOUND) 
         << std::endl
-        << GetErrorCodeString(ERROR_NOT_ENOUGH_MEMORY) 
+        << TranslateWin32ErrorCode(ERROR_NOT_ENOUGH_MEMORY) 
         << std::endl
-        << GetErrorCodeString(ERROR_INSUFFICIENT_BUFFER)
+        << TranslateWin32ErrorCode(ERROR_INSUFFICIENT_BUFFER)
         << std::endl;
 
     return 0;
