@@ -1,2 +1,3 @@
-# blog-code
-Repo to hold source code I discuss in my blog
+# Blog Code
+
+This is a repo to hold the source code I discuss in my blog.
