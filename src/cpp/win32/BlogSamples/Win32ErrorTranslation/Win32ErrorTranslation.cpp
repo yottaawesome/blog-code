@@ -4,7 +4,6 @@
 
 std::wstring TranslateWin32ErrorCode(const DWORD errorCode) noexcept
 {
-    std::wstring errorMessage;
     void* ptrMsgBuf = nullptr;
     const DWORD flags =
         FORMAT_MESSAGE_ALLOCATE_BUFFER |
@@ -23,7 +22,7 @@ std::wstring TranslateWin32ErrorCode(const DWORD errorCode) noexcept
     if (ptrMsgBuf == nullptr)
         return L"Failed to translate Win32 error code: " + std::to_wstring(errorCode);
 
-    errorMessage = (LPWSTR)ptrMsgBuf;
+    std::wstring errorMessage = (LPWSTR)ptrMsgBuf;
     errorMessage += L" (error code: " + std::to_wstring(errorCode) + L")";
     LocalFree(ptrMsgBuf);
 
