@@ -13,13 +13,13 @@ std::wstring TranslateWin32ErrorCode(const DWORD errorCode) noexcept
         FORMAT_MESSAGE_IGNORE_INSERTS;
     // See https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-formatmessagew
     FormatMessageW(
-        flags,
-        nullptr,
-        errorCode,
-        LANG_USER_DEFAULT,
-        (LPTSTR)&ptrMsgBuf,
-        0,
-        nullptr
+        flags,              // dwFlags
+        nullptr,            // lpSource
+        errorCode,          // dwMessageId
+        LANG_USER_DEFAULT,  // dwLanguageId
+        (LPWSTR)&ptrMsgBuf, // lpBuffer
+        0,                  // nSize
+        nullptr             // Arguments
     );
     if (ptrMsgBuf == nullptr)
         return L"Failed to translate Win32 error code: " + std::to_wstring(errorCode);
