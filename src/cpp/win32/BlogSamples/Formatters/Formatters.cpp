@@ -13,7 +13,7 @@ std::string ToString(const std::wstring& wstr)
 	const DWORD bytesRequired = WideCharToMultiByte(
 		CP_UTF8,										// CodePage
 		0,												// dwFlags 
-		wstr.c_str(),									// lpWideCharStr
+		&wstr[0],										// lpWideCharStr
 		static_cast<int>(wstr.size()),					// cchWideChar 
 		nullptr,										// lpMultiByteStr
 		0,												// cbMultiByte
@@ -28,7 +28,7 @@ std::string ToString(const std::wstring& wstr)
 	const DWORD status = WideCharToMultiByte(
 		CP_UTF8,										// CodePage
 		0,												// dwFlags 
-		wstr.c_str(),									// lpWideCharStr
+		&wstr[0],										// lpWideCharStr
 		static_cast<int>(wstr.size()),					// cchWideChar 
 		&strTo[0],										// lpMultiByteStr
 		static_cast<int>(strTo.size() * sizeof(char)),	// cbMultiByte
@@ -36,7 +36,7 @@ std::string ToString(const std::wstring& wstr)
 		nullptr											// lpUsedDefaultChar
 	);
 	if (status == 0)
-        throw std::runtime_error("ConvertWStringToString(): WideCharToMultiByte() failed");
+        throw std::runtime_error("ConvertWStringToString(): WideCharToMultiByte() [2] failed");
 
     return strTo;
 }
