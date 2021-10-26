@@ -12,14 +12,14 @@ std::string ToString(const std::wstring& wstr)
     std::string strTo(wstr.size(), '\0');
     // https://docs.microsoft.com/en-us/windows/win32/api/stringapiset/nf-stringapiset-widechartomultibyte
     const DWORD status = WideCharToMultiByte(
-        CP_UTF8,			// CodePage
-        0,					// dwFlags 
-        wstr.c_str(),		// lpWideCharStr
-        (int)wstr.size(),	// cchWideChar 
-        &strTo[0],			// lpMultiByteStr
-        (int)strTo.size(),	// cbMultiByte
-        nullptr,			// lpDefaultChar
-        nullptr				// lpUsedDefaultChar
+        CP_UTF8,										// CodePage
+        0,												// dwFlags 
+        wstr.c_str(),									// lpWideCharStr
+        static_cast<int>(wstr.size()),					// cchWideChar 
+        &strTo[0],										// lpMultiByteStr
+        static_cast<int>(strTo.size() * sizeof(char)),	// cbMultiByte
+        nullptr,										// lpDefaultChar
+        nullptr											// lpUsedDefaultChar
     );
     if (status == 0)
         throw std::runtime_error("ConvertWStringToString(): WideCharToMultiByte() failed");
