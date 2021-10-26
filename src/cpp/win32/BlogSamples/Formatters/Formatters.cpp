@@ -36,7 +36,7 @@ struct std::formatter<std::wstring> : std::formatter<std::string>
     }
 };
 
-int main(int argc, char* arcs[]) try
+int main(int argc, char* args[]) try
 {
     const std::wstring wstr = L"and I am a wide string";
     std::cout << std::format("I am a narrow string {}.\n", wstr);
