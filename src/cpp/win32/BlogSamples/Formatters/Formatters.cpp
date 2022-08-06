@@ -71,15 +71,11 @@ struct std::formatter<const wchar_t*> : std::formatter<std::string>
 
 int main(int argc, char* args[]) try
 {
-	
-
     const std::wstring wstr = L"and I'm a wide string";
 	const wchar_t* blah = L"and I'm also a wide string";
 	std::cout << std::format("I am a narrow string {}.\n", wstr);
 	std::cout << std::format("I am a narrow string {}.\n", blah);
 	//std::cout << std::format("I am a narrow string {}.\n", &L"A");
-	//std::cout << std::format("I am a narrow string {} {}.\n", &L"A", (const wchar_t*)L"A");
-	//std::cout << std::format("I am a narrow string {} {}.\n", L"A", (const wchar_t*)L"A");
 
     return 0;
 }
