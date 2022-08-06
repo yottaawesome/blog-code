@@ -24,7 +24,8 @@ std::wstring TranslateWin32ErrorCode(const DWORD errorCode) noexcept
 
     std::wstring errorMessage = (LPWSTR)ptrMsgBuf;
     errorMessage += L" (error code: " + std::to_wstring(errorCode) + L")";
-    LocalFree(ptrMsgBuf);
+    if (LocalFree(ptrMsgBuf))
+        std::wcerr << L"Failed to LocalFree() allocated buffer\n";
 
     return errorMessage;
 }

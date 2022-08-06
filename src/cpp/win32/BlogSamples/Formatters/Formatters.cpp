@@ -46,14 +46,25 @@ struct std::formatter<std::wstring> : std::formatter<std::string>
 {
     auto format(std::wstring wstr, format_context& ctx)
     {
-        return formatter<string>::format(std::format("{}", ToString(wstr)), ctx);
+        return formatter<std::string>::format(std::format("{}", ToString(wstr)), ctx);
     }
+};
+
+template <>
+struct std::formatter<const wchar_t*> : std::formatter<std::string>
+{
+	auto format(const wchar_t* wstr, format_context& ctx)
+	{
+		return formatter<std::string>::format(std::format("{}", ToString(wstr)), ctx);
+	}
 };
 
 int main(int argc, char* args[]) try
 {
-    const std::wstring wstr = L"and I am a wide string";
-    std::cout << std::format("I am a narrow string {}.\n", wstr);
+    const std::wstring wstr = L"and I'm a wide string";
+	const wchar_t* blah = L"and I'm also a wide string";
+	std::cout << std::format("I am a narrow string {}.\n", wstr);
+	std::cout << std::format("I am a narrow string {}.\n", blah);
 
     return 0;
 }
